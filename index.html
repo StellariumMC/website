@@ -45,7 +45,6 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
         header {
             background: rgba(4, 6, 8, 0.95);
             backdrop-filter: blur(10px);
@@ -115,7 +114,6 @@
             width: 100%;
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -125,8 +123,15 @@
             padding-top: 80px;
         }
 
+        .hero-wrapper {
+            display: flex;
+            width: 100%;
+            gap: 40px;
+        }
+
         .hero-content {
-            max-width: 700px;
+            flex: 1;
+            max-width: 600px;
             z-index: 2;
             position: relative;
         }
@@ -205,62 +210,87 @@
             box-shadow: 0 7px 20px rgba(100, 245, 255, 0.2);
         }
 
-        .hero-grid {
-            position: absolute;
-            right: -100px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45%;
-            max-width: 600px;
-            height: 70%;
-            background: 
-                linear-gradient(rgba(12, 16, 20, 0.8), rgba(12, 16, 20, 0.8)),
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%2364f5ff" stroke-width="0.5" stroke-dasharray="2 2"/></svg>');
-            background-size: 50px;
+        .changelog-card {
+            flex: 1;
+            max-width: 500px;
+            background: rgba(4, 6, 8, 0.8);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
+            padding: 30px;
             border: 1px solid rgba(100, 245, 255, 0.1);
             box-shadow: 0 0 50px rgba(100, 245, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
+            max-height: 70vh;
+            overflow-y: auto;
+            scrollbar-width: none;
         }
 
-        @keyframes float {
-            0% { transform: translateY(-50%) translateX(0); }
-            50% { transform: translateY(-55%) translateX(10px); }
-            100% { transform: translateY(-50%) translateX(0); }
+        .changelog-card::-webkit-scrollbar {
+            display: none;
         }
 
-        .grid-highlight {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(100, 245, 255, 0.4), transparent 70%);
-            border-radius: 50%;
-            animation: pulse 4s ease-in-out infinite;
+        .changelog-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            top: 0;
+            z-index: 10;
         }
 
-        .grid-highlight:nth-child(1) {
-            top: 20%;
-            left: 30%;
+        .changelog-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(100, 245, 255, 0.1);
         }
 
-        .grid-highlight:nth-child(2) {
-            bottom: 30%;
-            right: 20%;
-            animation-delay: -1s;
+        .changelog-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .grid-highlight:nth-child(3) {
-            top: 50%;
-            left: 40%;
-            animation-delay: -2s;
+        .changelog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.5); opacity: 0.2; }
+        .changelog-version {
+            background: var(--accent);
+            color: var(--bg-panel);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Features Section */
+        .changelog-loader {
+            background: rgba(100, 245, 255, 0.2);
+            color: var(--accent);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .changelog-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .changelog-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
         .section {
             padding: 100px 0;
         }
@@ -368,7 +398,6 @@
             font-size: 0.9rem;
         }
 
-        /* Versions Section */
         .versions {
             background: var(--bg-panel);
             position: relative;
@@ -454,17 +483,6 @@
             color: var(--accent2);
             margin-right: 10px;
             margin-top: 5px;
-        }
-
-        .note {
-            background: rgba(100, 245, 255, 0.1);
-            border-left: 3px solid var(--accent);
-            padding: 15px;
-            border-radius: 0 8px 8px 0;
-            margin: 20px 0;
-            font-size: 0.9rem;
-            color: var(--accent2);
-            font-family: 'JetBrains Mono', monospace;
         }
 
         .download {
@@ -623,7 +641,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -635,19 +652,19 @@
             transform: translateY(0);
         }
 
-        /* Responsive Design */
         @media (max-width: 992px) {
             .hero {
                 text-align: center;
                 padding-top: 100px;
             }
             
-            .hero-content {
-                margin: 0 auto;
+            .hero-wrapper {
+                flex-direction: column;
             }
             
-            .hero-grid {
-                display: none;
+            .hero-content, .changelog-card {
+                max-width: 100%;
+                margin: 0 auto;
             }
             
             .cta-buttons {
@@ -720,7 +737,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container navbar">
             <a href="#" class="logo">
@@ -736,27 +752,34 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Zen</h1>
-                <h2>// Hypixel Skyblock QOL Mod</h2>
-                <p>meow meow meeow meow meow meow</p>
-                <div class="cta-buttons">
-                    <a href="#versions" class="btn btn-primary">Download Now</a>
-                    <a href="#features" class="btn btn-outline">View Features</a>
+            <div class="hero-wrapper">
+                <div class="hero-content fade-in">
+                    <h1>Zen</h1>
+                    <h2>// Hypixel Skyblock QOL Mod</h2>
+                    <p>meow meow meeow meow meow meow</p>
+                    <div class="cta-buttons">
+                        <a href="#versions" class="btn btn-primary">Download Now</a>
+                        <a href="#features" class="btn btn-outline">View Features</a>
+                    </div>
+                </div>
+                <div class="changelog-card fade-in">
+                    <h3>Changelogs</h3>
+                    <div class="changelog-list" id="changelog-list">
+                        <div class="changelog-item">
+                            <div class="changelog-header">
+                                <span class="changelog-version">Loading...</span>
+                                <span class="changelog-date"></span>
+                            </div>
+                            <div class="changelog-text">Fetching updates...</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="hero-grid">
-            <div class="grid-highlight"></div>
-            <div class="grid-highlight"></div>
-            <div class="grid-highlight"></div>
-        </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="section">
         <div class="container">
             <div class="section-title fade-in">
@@ -829,7 +852,6 @@
         </div>
     </section>
 
-    <!-- Versions Section -->
     <section id="versions" class="section versions">
         <div class="container">
             <div class="section-title fade-in">
@@ -875,7 +897,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -913,7 +934,6 @@
     </footer>
 
     <script>
-        // Fade-in animation on scroll
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
             
@@ -928,13 +948,44 @@
                 });
             };
             
-            // Initial check
+            fetch('https://api.modrinth.com/v2/project/zenmod/version')
+                .then(response => response.json())
+                .then(data => {
+                    const changelogList = document.getElementById('changelog-list');
+                    changelogList.innerHTML = '';
+                    
+                    data.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
+                    
+                    data.slice(0, 4).forEach(version => {
+                        const date = new Date(version.date_published);
+                        const formattedDate = date.toLocaleDateString();
+                        const loader = version.loaders[0];
+                        const formattedLoader = loader.charAt(0).toUpperCase() + loader.slice(1);
+                        
+                        const item = document.createElement('div');
+                        item.className = 'changelog-item';
+                        item.innerHTML = `
+                            <div class="changelog-header">
+                                <div>
+                                    <span class="changelog-version">v${version.version_number}</span>
+                                    <span class="changelog-loader">${formattedLoader}</span>
+                                </div>
+                                <span class="changelog-date">${formattedDate}</span>
+                            </div>
+                            <div class="changelog-text">${version.changelog}</div>
+                        `;
+                        changelogList.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching changelog:', error);
+                    document.getElementById('changelog-list').innerHTML = 
+                        '<div class="changelog-item">Failed to load updates</div>';
+                });
+
             fadeInOnScroll();
-            
-            // Check on scroll
             window.addEventListener('scroll', fadeInOnScroll);
             
-            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
