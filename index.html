@@ -17,6 +17,7 @@
             --accent2: #50c8dc;
             --text: #e0f0ff;
             --text-secondary: #a0b0c0;
+            --kelp: #64f5ff;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -45,13 +46,14 @@
             padding: 0 20px;
         }
 
-        header {
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
             background: rgba(4, 6, 8, 0.95);
             backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
             border-bottom: 1px solid rgba(100, 245, 255, 0.1);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
@@ -60,7 +62,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            padding: 15px 0;
         }
 
         .logo {
@@ -115,15 +117,6 @@
             width: 100%;
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         .hero {
             min-height: 100vh;
             display: flex;
@@ -133,17 +126,17 @@
             padding: 100px 0 50px;
         }
 
-        .hero-wrapper {
+        .hero-content {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
             width: 100%;
-            gap: 40px;
         }
 
-        .hero-content {
+        .hero-text {
             flex: 1;
             max-width: 600px;
-            z-index: 2;
-            position: relative;
         }
 
         .hero h1 {
@@ -160,8 +153,7 @@
 
         .hero h2 {
             font-size: 1.8rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
+            margin-bottom: 20px;
             color: var(--text-secondary);
             font-weight: 500;
             font-family: 'JetBrains Mono', monospace;
@@ -221,85 +213,86 @@
             box-shadow: 0 7px 20px rgba(100, 245, 255, 0.2);
         }
 
-        .changelog-card {
+        .download-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: var(--bg-element);
+            border: 1px solid rgba(100, 245, 255, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--bg-element-hover);
+            color: var(--accent);
+        }
+
+        .download-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .stats-grid {
             flex: 1;
-            max-width: 500px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+        }
+
+        .stat-card {
             background: rgba(4, 6, 8, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 10px;
-            padding: 30px;
+            padding: 25px;
+            text-align: center;
             border: 1px solid rgba(100, 245, 255, 0.1);
-            box-shadow: 0 0 50px rgba(100, 245, 255, 0.1);
-            max-height: 70vh;
-            overflow-y: auto;
-            scrollbar-width: none;
+            transition: var(--transition);
         }
 
-        .changelog-card::-webkit-scrollbar {
-            display: none;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(100, 245, 255, 0.2);
         }
 
-        .changelog-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--accent);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 10px;
-            top: 0;
-            z-index: 10;
-        }
-
-        .changelog-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(100, 245, 255, 0.1);
-        }
-
-        .changelog-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .changelog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .changelog-version {
-            background: var(--accent);
-            color: var(--bg-panel);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            margin-bottom: 5px;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .changelog-loader {
-            background: rgba(100, 245, 255, 0.2);
-            color: var(--accent);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .changelog-date {
-            color: var(--text-secondary);
+        .stat-label {
             font-size: 0.9rem;
-        }
-
-        .changelog-text {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            white-space: pre-line;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section {
@@ -339,39 +332,31 @@
             color: var(--text-secondary);
         }
 
-        .features-container {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .feature-category {
+        .feature-card {
             background: var(--bg-element);
             border-radius: 10px;
             padding: 30px;
             border: 1px solid rgba(100, 245, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        .feature-category:hover {
+        .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             border-color: rgba(100, 245, 255, 0.3);
         }
 
-        .category-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--accent);
-        }
-
-        .category-title i {
-            font-size: 2rem;
-            color: var(--accent);
+        .feature-icon {
             width: 60px;
             height: 60px;
             background: rgba(100, 245, 255, 0.1);
@@ -379,23 +364,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .category-title h3 {
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
             font-size: 1.6rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .features-list {
             list-style: none;
+            margin-top: 15px;
         }
 
         .features-list li {
-            padding: 12px 0;
+            padding: 8px 0;
             display: flex;
             align-items: flex-start;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
         }
 
         .features-list li:last-child {
@@ -405,8 +405,8 @@
         .features-list li i {
             color: var(--accent2);
             margin-right: 10px;
-            margin-top: 5px;
-            font-size: 0.9rem;
+            margin-top: 3px;
+            font-size: 0.8rem;
         }
 
         .versions {
@@ -415,8 +415,7 @@
             overflow: hidden;
         }
 
-        .versions-container {
-            align-items: stretch;
+        .versions-grid {
             display: flex;
             gap: 40px;
             flex-wrap: wrap;
@@ -424,8 +423,6 @@
         }
 
         .version-card {
-            display: flex;
-            flex-direction: column;
             flex: 1;
             min-width: 300px;
             max-width: 500px;
@@ -435,6 +432,8 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             transition: var(--transition);
             border: 1px solid rgba(100, 245, 255, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .version-card:hover {
@@ -455,7 +454,7 @@
             color: var(--accent);
         }
 
-        .version-header .version {
+        .version-tag {
             background: var(--accent);
             color: var(--bg-panel);
             display: inline-block;
@@ -467,21 +466,21 @@
         }
 
         .version-content {
-            flex: 1 1 auto;
+            flex: 1;
             display: flex;
             flex-direction: column;
             padding: 30px;
         }
 
-        .version-content .cta-buttons {
-            margin-top: auto;
-            display: flex;
-            gap: 20px;
+        .version-content p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
         }
 
         .version-content ul {
             list-style: none;
             margin: 25px 0;
+            flex-grow: 1;
         }
 
         .version-content ul li {
@@ -496,60 +495,31 @@
             margin-top: 5px;
         }
 
-        .download {
-            text-align: center;
-            background: linear-gradient(to bottom, var(--bg-panel), var(--bg));
-            position: relative;
+        .version-content .cta-buttons {
+            margin-top: auto;
+            display: flex;
+            gap: 15px;
         }
 
-        .download-box {
-            background: var(--bg-element);
-            border-radius: 10px;
-            padding: 60px;
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid rgba(100, 245, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(100, 245, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .download-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .download-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 56px;
+            min-width: 56px;
+            padding: 0 16px;
+            background: transparent;
+            border: 2px solid var(--accent);
             color: var(--accent);
+            border-radius: 8px;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
         }
 
-        .download-content p {
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0.9;
-            color: var(--text-secondary);
+        .btn-icon:hover {
+            background: rgba(100, 245, 255, 0.1);
+            transform: translateY(-3px);
         }
 
         footer {
@@ -613,11 +583,6 @@
             transform: translateX(5px);
         }
 
-        .footer-links a i {
-            width: 20px;
-            text-align: center;
-        }
-
         .social-links {
             display: flex;
             gap: 15px;
@@ -634,6 +599,7 @@
             border-radius: 8px;
             color: var(--accent);
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .social-links a:hover {
@@ -652,53 +618,13 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.appear {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .btn-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: 64px;
-            min-width: 64px;
-            padding: 0 16px;
-            margin-left: 8px;
+        .mobile-menu-btn {
+            display: none;
             background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            border-radius: 8px;
-            font-size: 1.3rem;
-            transition: var(--transition);
-            box-shadow: none;
-        }
-        .btn-icon i {
-            font-size: 1.3rem;
-        }
-        .btn-icon:hover {
-            background: transparent;
-            color: var(--accent2);
-            transform: translateY(-3px) scale(1.08);
-        }
-
-        @media (max-width: 992px) {
-            .hero-wrapper {
-                flex-direction: column;
-            }
-            .hero-content, .changelog-card {
-                max-width: 100%;
-                margin: 0 auto;
-            }
-            .cta-buttons {
-                justify-content: center;
-            }
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -714,138 +640,164 @@
                 display: none;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             }
+            
             .nav-links.active {
                 display: flex;
             }
+            
             .nav-links a {
                 padding: 12px 20px;
                 width: 100%;
                 font-size: 1.2rem;
             }
+            
             .mobile-menu-btn {
                 display: block;
             }
+            
             .hero {
                 padding-top: 140px;
             }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+            
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
+            
             .hero h2 {
-                font-size: 1.5rem;
-                margin-bottom: 25px;
+                font-size: 1.4rem;
             }
-            .hero p {
-                font-size: 1.1rem;
+            
+            .stats-grid {
+                max-width: 100%;
             }
-            .section {
-                padding: 70px 0;
-            }
-            .section-title {
-                margin-bottom: 50px;
-            }
-            .section-title h2 {
-                font-size: 2.3rem;
-            }
-            .download-box {
-                padding: 40px 20px;
-            }
-            .changelog-card {
-                max-height: 50vh;
+            
+            .stat-card {
                 padding: 20px;
             }
-            .btn {
-                padding: 14px 28px;
-                font-size: 1rem;
+            
+            .stat-number {
+                font-size: 2rem;
             }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .versions-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
             .version-card {
                 min-width: 100%;
             }
-            .cta-buttons {
-                gap: 12px;
+
+            .dropdown-content {
+                position: static;
+                display: block;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                margin-top: 10px;
             }
-            .footer-content {
-                gap: 30px;
+
+            .dropdown-content a {
+                border: 1px solid var(--accent);
+                margin-bottom: 10px;
+                border-radius: 8px;
+                background: transparent;
             }
         }
 
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
-            .hero h2 {
-                font-size: 1.3rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
+            
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            .section-title p {
-                font-size: 1rem;
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
             }
-            .cta-buttons {
-                flex-direction: column;
+            
+            .stat-number {
+                font-size: 1.8rem;
             }
-            .btn {
-                width: 100%;
-            }
-            .btn-icon {
-                margin-left: 0;
-                margin-top: 10px;
-                width: 100%;
-            }
-            .changelog-card {
-                max-height: 40vh;
-            }
-            .version-content .cta-buttons {
-                flex-direction: column;
+            
+            .stat-label {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo">
-                <i class="fas fa-code"></i>
-                meowing<span>.xyz</span>
-            </a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links" id="navLinks">
-                <a href="#features">Features</a>
-                <a href="#versions">Versions</a>
-                <a href="#versions">Download</a>
-                <a href="#faq">FAQ</a>
+    <nav>
+        <div class="container">
+            <div class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-code"></i>
+                    Zen<span>mod</span>
+                </a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#features">Features</a>
+                    <a href="#versions">Versions</a>
+                    <a href="#versions">Download</a>
+                    <a href="https://discord.gg/KPmHQUC97G">Discord</a>
+                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
     <section class="hero">
         <div class="container">
-            <div class="hero-wrapper">
-                <div class="hero-content fade-in">
+            <div class="hero-content">
+                <div class="hero-text">
                     <h1>Zen</h1>
-                    <h2>// Hypixel Skyblock QOL Mod</h2>
-                    <p>meow meow meeow meow meow meow</p>
+                    <h2>Hypixel Skyblock QOL Mod</h2>
+                    <p>The comprehensive quality-of-life mod for Hypixel Skyblock with advanced features for slayers, dungeons, and general gameplay enhancement.</p>
                     <div class="cta-buttons">
-                        <a href="#versions" class="btn btn-primary">Download Now</a>
+                        <div class="download-dropdown">
+                            <a href="#" class="btn btn-primary">Download Now</a>
+                            <div class="dropdown-content">
+                                <a href="https://modrinth.com/mod/zenmod/versions?l=forge">
+                                    <i class="fas fa-download"></i> Zen 1.8.9
+                                </a>
+                                <a href="https://modrinth.com/mod/zenmod/versions?l=fabric">
+                                    <i class="fas fa-download"></i> Zen 1.21
+                                </a>
+                            </div>
+                        </div>
                         <a href="#features" class="btn btn-outline">View Features</a>
                     </div>
                 </div>
-                <div class="changelog-card fade-in">
-                    <h3>Changelogs</h3>
-                    <div class="changelog-list" id="changelog-list">
-                        <div class="changelog-item">
-                            <div class="changelog-header">
-                                <span class="changelog-version">Loading...</span>
-                                <span class="changelog-date"></span>
-                            </div>
-                            <div class="changelog-text">Fetching updates...</div>
-                        </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Features</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">MC Versions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3K+</div>
+                        <div class="stat-label">Downloads</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Open</div>
+                        <div class="stat-label">Source</div>
                     </div>
                 </div>
             </div>
@@ -854,84 +806,139 @@
 
     <section id="features" class="section">
         <div class="container">
-            <div class="section-title fade-in">
+            <div class="section-title">
                 <h2>Mod Features</h2>
-                <p>Awesome sauce meowing features</p>
+                <p>Comprehensive automation and quality-of-life improvements</p>
             </div>
-            <div class="features-container">
-                <div class="feature-category fade-in">
-                    <div class="category-title">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-sliders-h"></i>
-                        <h3>General</h3>
                     </div>
+                    <h3>General Features</h3>
+                    <p>Essential quality-of-life improvements for everyday gameplay</p>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Custom entity highlight</li>
-                        <li><i class="fas fa-check"></i> Custom block overlay</li>
-                        <li><i class="fas fa-check"></i> Custom player model size</li>
-                        <li><i class="fas fa-check"></i> No fire overlay</li>
-                        <li><i class="fas fa-check"></i> No lightning</li>
-                        <li><i class="fas fa-check"></i> No hurtcam</li>
-                        <li><i class="fas fa-check"></i> No inventory potion effects</li>
-                        <li><i class="fas fa-check"></i> No chat history limit</li>
-                        <li><i class="fas fa-check"></i> Armor HUD</li>
-                        <li><i class="fas fa-check"></i> Ragnarock alert</li>
+                        <li><i class="fas fa-check"></i> Chat cleaner & calculator</li>
+                        <li><i class="fas fa-check"></i> Damage tracker & entity highlight</li>
+                        <li><i class="fas fa-check"></i> Guild/Party message formatter</li>
+                        <li><i class="fas fa-check"></i> Ragnarock & same server alerts</li>
+                        <li><i class="fas fa-check"></i> Price data & world age display</li>
+                        <li><i class="fas fa-check"></i> Reaper timer & missing enchants</li>
+                        <li><i class="fas fa-check"></i> Trash highlighter & item protection</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>HUD Features</h3>
+                    <p>Customizable overlays and display elements</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Armor & vanilla HP HUD</li>
                         <li><i class="fas fa-check"></i> Arrow poison tracker</li>
-                        <li><i class="fas fa-check"></i> Guild/Party Chat Format</li>
-                        <li><i class="fas fa-check"></i> Guild/Friend Join/Leave Format</li>
-                        <li><i class="fas fa-check"></i> Better AH messages</li>
-                        <li><i class="fas fa-check"></i> Better BZ messages</li>
-                        <li><i class="fas fa-check"></i> Same server alert</li>
+                        <li><i class="fas fa-check"></i> Party display & stats display</li>
+                        <li><i class="fas fa-check"></i> Inventory search functionality</li>
+                        <li><i class="fas fa-check"></i> Fatal tempo overlay</li>
+                        <li><i class="fas fa-check"></i> Item pickup log</li>
                     </ul>
                 </div>
-                
-                <div class="feature-category fade-in">
-                    <div class="category-title">
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Visual Features</h3>
+                    <p>Enhanced visual elements and customization options</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Block overlay & damage tint</li>
+                        <li><i class="fas fa-check"></i> Custom model size/spin/tilt</li>
+                        <li><i class="fas fa-check"></i> Effective area overlay</li>
+                        <li><i class="fas fa-check"></i> Fire freeze overlay</li>
+                        <li><i class="fas fa-check"></i> Item animations</li>
+                        <li><i class="fas fa-check"></i> Bestiary mob highlight</li>
+                        <li><i class="fas fa-check"></i> Zealot spawn locations</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Quality of Life</h3>
+                    <p>Remove annoying visual effects and improve gameplay</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Hide fire overlay & falling blocks</li>
+                        <li><i class="fas fa-check"></i> Hide status effects & thunder</li>
+                        <li><i class="fas fa-check"></i> Hide enderman teleport</li>
+                        <li><i class="fas fa-check"></i> Hide non-starred mob nametags</li>
+                        <li><i class="fas fa-check"></i> Hide death animation & damage</li>
+                        <li><i class="fas fa-check"></i> No hurt cam bob</li>
+                        <li><i class="fas fa-check"></i> Remove selfie camera</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-skull"></i>
-                        <h3>Slayer</h3>
                     </div>
+                    <h3>Slayer Features</h3>
+                    <p>Comprehensive slayer assistance and tracking</p>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Slayer kill timer</li>
-                        <li><i class="fas fa-check"></i> Slayer boss highlight</li>
-                        <li><i class="fas fa-check"></i> Vengeance proc timer</li>
-                        <li><i class="fas fa-check"></i> Vengeance damage tracker</li>
-                        <li><i class="fas fa-check"></i> Carry counter</li>
-                        <li><i class="fas fa-check"></i> Laser timer</li>
-                        <li><i class="fas fa-check"></i> Miniboss stuff</li>
+                        <li><i class="fas fa-check"></i> Slayer timer & highlight</li>
+                        <li><i class="fas fa-check"></i> Slayer stats & HUD display</li>
+                        <li><i class="fas fa-check"></i> Enderman laser timer & hide</li>
+                        <li><i class="fas fa-check"></i> Miniboss spawn alerts</li>
+                        <li><i class="fas fa-check"></i> Vengeance proc timer & tracker</li>
+                        <li><i class="fas fa-check"></i> Carry counter system</li>
                     </ul>
                 </div>
-                
-                <div class="feature-category fade-in">
-                    <div class="category-title">
+
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-dungeon"></i>
-                        <h3>Dungeons</h3>
                     </div>
+                    <h3>Dungeons</h3>
+                    <p>Complete dungeon assistance and optimization</p>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Blood camp messages</li>
-                        <li><i class="fas fa-check"></i> Server lag timer</li>
-                        <li><i class="fas fa-check"></i> Terminal tracker</li>
-                        <li><i class="fas fa-check"></i> Key alerts</li>
-                        <li><i class="fas fa-check"></i> Key highlight</li>
-                        <li><i class="fas fa-check"></i> Fire freeze timer</li>
-                        <li><i class="fas fa-check"></i> Crypt reminder</li>
-                        <li><i class="fas fa-check"></i> Custom party finder messages</li>
-                        <li><i class="fas fa-check"></i> Architect draft messages</li>
-                        <li><i class="fas fa-check"></i> Highlight star mobs</li>
-                        <li><i class="fas fa-check"></i> Scarf spawn timers</li>
-                        <li><i class="fas fa-check"></i> Highlight livid | Hide wrong livids | Line to correct livid</li>
-                        <li><i class="fas fa-check"></i> Livid ice spray timer</li>
+                        <li><i class="fas fa-check"></i> Architect draft & blood timer</li>
+                        <li><i class="fas fa-check"></i> Crypt reminder & custom PF</li>
+                        <li><i class="fas fa-check"></i> Fire freeze & livid timers</li>
+                        <li><i class="fas fa-check"></i> Livid highlight & pathfinding</li>
+                        <li><i class="fas fa-check"></i> Key alerts & highlights</li>
+                        <li><i class="fas fa-check"></i> Starred mob highlights</li>
+                        <li><i class="fas fa-check"></i> Scarf & minion spawn timers</li>
+                        <li><i class="fas fa-check"></i> Server lag & terminal tracker</li>
+                        <li><i class="fas fa-check"></i> Mask timers & leap announce</li>
                     </ul>
                 </div>
-                
-                <div class="feature-category fade-in">
-                    <div class="category-title">
-                        <i class="fas fa-smile"></i>
-                        <h3>Silly :3</h3>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-regular fa-lightbulb"></i>
                     </div>
+                    <h3>Rift Features</h3>
+                    <p>Specialized features for the Rift dimension</p>
                     <ul class="features-list">
-                        <li><i class="fas fa-check"></i> Automeow</li>
-                        <li><i class="fas fa-check"></i> Meow chat sounds</li>
-                        <li><i class="fas fa-check"></i> Meow death sounds</li>
-                        <li><i class="fas fa-check"></i> Meow translator</li>
+                        <li><i class="fas fa-check"></i> Coherent rod overlay</li>
+                        <li><i class="fas fa-check"></i> Larva silk lines</li>
+                        <li><i class="fas fa-check"></i> Berberis helper</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-person-falling"></i>
+                    </div>
+                    <h3>Silly Features</h3>
+                    <p>Fun and whimsical additions to brighten your day</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Automeow system</li>
+                        <li><i class="fas fa-check"></i> Meow counter tracking</li>
+                        <li><i class="fas fa-check"></i> Meow chat & death sounds</li>
+                        <li><i class="fas fa-check"></i> Cat speak translator</li>
+                        <li><i class="fas fa-check"></i> Rat image</li>
+                        <li><i class="fas fa-check"></i> Random meow generation</li>
                     </ul>
                 </div>
             </div>
@@ -940,42 +947,32 @@
 
     <section id="versions" class="section versions">
         <div class="container">
-            <div class="section-title fade-in">
-                <h2>Supported Versions</h2>
-                <p>Available for both Forge and Fabric mod loaders</p>
+            <div class="section-title">
+                <h2>Download Zen</h2>
+                <p>Choose your preferred Minecraft version</p>
             </div>
-            <div class="versions-container">
-                <div class="version-card fade-in">
+            <div class="versions-grid">
+                <div class="version-card">
                     <div class="version-header">
-                        <h3>Forge Edition</h3>
-                        <div class="version">1.8.9</div>
+                        <h3>Zen Mod</h3>
+                        <div class="version-tag">STABLE</div>
                     </div>
                     <div class="version-content">
-                        <p>Download for pro meowing</p>
+                        <p>The comprehensive quality-of-life mod for Hypixel Skyblock available for both Minecraft 1.8.9 and 1.21.</p>
                         <ul>
-                            <li><i class="fas fa-check"></i> Optimized performance for Skyblock</li>
-                            <li><i class="fas fa-check"></i> Regular updates and bug fixes</li>
+                            <li><i class="fas fa-check"></i> 100+ Quality of Life features</li>
+                            <li><i class="fas fa-check"></i> Active development & support</li>
+                            <li><i class="fas fa-check"></i> Advanced HUD customization</li>
+                            <li><i class="fas fa-check"></i> Extensive visual enhancements</li>
+                            <li><i class="fas fa-check"></i> Open source & actively maintained</li>
                         </ul>
                         <div class="cta-buttons">
-                            <a href="https://modrinth.com/mod/zenmod/versions?l=forge" class="btn btn-outline">Download Forge</a>
-                            <a href="https://github.com/kiwidotzip/zen" class="btn btn-icon" title="View on GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="version-card fade-in">
-                    <div class="version-header">
-                        <h3>Fabric Edition</h3>
-                        <div class="version">1.21.5</div>
-                    </div>
-                    <div class="version-content">
-                        <p>1.21 meowing wow meow meow.</p>
-                        <ul>
-                            <li><i class="fas fa-check"></i> Optimized performance for Skyblock</li>
-                            <li><i class="fas fa-check"></i> Regular updates and bug fixes</li>
-                        </ul>
-                        <div class="cta-buttons">
-                            <a href="https://modrinth.com/mod/zenmod/versions?l=fabric" class="btn btn-outline">Download Fabric</a>
-                            <a href="https://github.com/kiwidotzip/zen-1.21" class="btn btn-icon" title="View on GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                            <a href="https://modrinth.com/mod/zenmod/versions?l=forge" class="btn btn-primary">
+                                <i class="fas fa-download"></i> Zen 1.8.9
+                            </a>
+                            <a href="https://modrinth.com/mod/zenmod/versions?l=fabric" class="btn btn-primary">
+                                <i class="fas fa-download"></i> Zen 1.21
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -988,109 +985,76 @@
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>Zen Mod</h3>
-                    <p>Social links</p>
+                    <p>The ultimate quality-of-life modification for Hypixel Skyblock, providing comprehensive automation and enhancement features for the best possible gameplay experience.</p>
                     <div class="social-links">
-                        <a href="https://discord.gg/KPmHQUC97G" target="_blank"><i class="fab fa-discord"></i></a>
-                        <a href="https://github.com/kiwidotzip/zen" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://modrinth.com/mod/zenmod/" target="_blank"><i class="fa-solid fa-gear"></i></a>
+                        <a href="https://github.com/meowing-xyz/zen"><i class="fab fa-github"></i></a>
+                        <a href="https://discord.gg/KPmHQUC97G"><i class="fab fa-discord"></i></a>
+                        <a href="https://modrinth.com/mod/zenmod"><i class="fas fa-cube"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
-                        <li><a href="#versions"><i class="fas fa-chevron-right"></i> Versions</a></li>
-                        <li><a href="#versions"><i class="fas fa-chevron-right"></i> Download</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Changelog</a></li>
+                        <li><a href="#features"><i class="fas fa-list"></i> Features</a></li>
+                        <li><a href="#versions"><i class="fas fa-download"></i> Download</a></li>
+                        <li><a href="https://github.com/meowing-xyz/zen/releases"><i class="fas fa-tag"></i> Releases</a></li>
+                        <li><a href="https://github.com/meowing-xyz/zen/issues"><i class="fas fa-bug"></i> Issues</a></li>
+                        <li><a href="https://github.com/meowing-xyz/zen/pulls"><i class="fas fa-code-branch"></i> Pull Requests</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Support</h3>
+                    <h3>Community</h3>
                     <ul class="footer-links">
-                        <li><a href="https://github.com/kiwidotzip/zen/issues"><i class="fas fa-chevron-right"></i> Report Issues</a></li>
-                        <li><a href="https://discord.gg/KPmHQUC97G" target="_blank"><i class="fas fa-chevron-right"></i> Community</a></li>
-                        <li><a href="mailto:kiwidotzip@gmail.com" target="_blank"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="https://discord.gg/KPmHQUC97G"><i class="fab fa-discord"></i> Discord Server</a></li>
+                        <li><a href="https://github.com/meowing-xyz/zen"><i class="fab fa-github"></i> GitHub Repository</a></li>
+                        <li><a href="https://modrinth.com/mod/zenmod"><i class="fas fa-cube"></i> Modrinth Page</a></li>
                     </ul>
+                    <h3>Credits</h3>
+                    <p>Special thanks to the open source projects that made this possible: Devonian, NoammAddons, Firmament/NEU, SkyHanni, SkyblockTweaks, and Skytils.</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>2025 | Zen Mod</p>
+                <p>&copy; 2025 Zen Mod. Open source under GPL-3.0 License. Made with <span style="color: var(--accent);">♥</span></p>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
+            const mobileBtn = document.querySelector('.mobile-menu-btn i');
             
-            const fadeInOnScroll = function() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight - 100) {
-                        element.classList.add('appear');
-                    }
-                });
-            };
+            navLinks.classList.toggle('active');
             
-            fetch('https://api.modrinth.com/v2/project/zenmod/version')
-                .then(response => response.json())
-                .then(data => {
-                    const changelogList = document.getElementById('changelog-list');
-                    changelogList.innerHTML = '';
-                    
-                    data.sort((a, b) => new Date(b.date_published) - new Date(a.date_published));
-                    
-                    data.slice(0, 4).forEach(version => {
-                        const date = new Date(version.date_published);
-                        const formattedDate = date.toLocaleDateString();
-                        const loader = version.loaders[0];
-                        const formattedLoader = loader.charAt(0).toUpperCase() + loader.slice(1);
-                        
-                        const item = document.createElement('div');
-                        item.className = 'changelog-item';
-                        item.innerHTML = `
-                            <div class="changelog-header">
-                                <div>
-                                    <span class="changelog-version">v${version.version_number}</span>
-                                    <span class="changelog-loader">${formattedLoader}</span>
-                                </div>
-                                <span class="changelog-date">${formattedDate}</span>
-                            </div>
-                            <div class="changelog-text">${version.changelog}</div>
-                        `;
-                        changelogList.appendChild(item);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching changelog:', error);
-                    document.getElementById('changelog-list').innerHTML = 
-                        '<div class="changelog-item">Failed to load updates</div>';
-                });
+            if (navLinks.classList.contains('active')) {
+                mobileBtn.classList.remove('fa-bars');
+                mobileBtn.classList.add('fa-times');
+            } else {
+                mobileBtn.classList.remove('fa-times');
+                mobileBtn.classList.add('fa-bars');
+            }
+        }
 
-            fadeInOnScroll();
-            window.addEventListener('scroll', fadeInOnScroll);
-            
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                    navLinks.classList.remove('active');
-                });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(4, 6, 8, 0.98)';
+            } else {
+                nav.style.background = 'rgba(4, 6, 8, 0.95)';
+            }
         });
     </script>
 </body>
